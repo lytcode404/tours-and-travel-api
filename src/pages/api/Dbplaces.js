@@ -10,13 +10,13 @@ export default async function handler(req, res) {
     // }
     const { mongoClient } = await connectToDatabase();
 
-    const db = mongoClient.db("my-database");
+    const db = mongoClient.db("my-database2");
 
     if (!db) {
       throw new Error("Unable to retrieve the database.");
     }
 
-    const collection = db.collection("users");
+    const collection = db.collection("posts");
     if (!collection) {
       throw new Error("Unable to retrieve the collection.");
     }
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       try {
         const dataBase = db;
-        const results = await dataBase.collection("users").insertOne(req.body);
+        const results = await dataBase.collection("posts").insertOne(req.body);
         res.status(201).json({success: "great"});
       } catch (e) {
         res.status(201).json({error: e})
